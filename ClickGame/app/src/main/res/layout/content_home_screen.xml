@@ -17,6 +17,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/playGround"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
@@ -51,9 +52,9 @@
             android:text="TextView"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:id="@+id/txtscore"
-            android:layout_alignBaseline="@+id/txttime"
-            android:layout_alignBottom="@+id/txttime"
+            android:id="@+id/txtScore"
+            android:layout_alignBaseline="@+id/txtTime"
+            android:layout_alignBottom="@+id/txtTime"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -62,11 +63,28 @@
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginTop="18dp"
-            android:id="@+id/txttime"
+            android:id="@+id/txtTime"
             android:layout_below="@+id/time"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:textAlignment="textEnd" />
+
+        <ProgressBar
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:id="@+id/playerHealth"
+            android:layout_height="30dp"
+            android:layout_width="100dp"
+            android:layout_below="@+id/score"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="22dp"
+            android:id="@+id/txtName" />
 
     </RelativeLayout>
 </RelativeLayout>
