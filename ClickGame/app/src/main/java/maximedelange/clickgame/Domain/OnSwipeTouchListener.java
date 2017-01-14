@@ -6,8 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import maximedelange.clickgame.R;
 import maximedelange.clickgame.Screens.HomeScreen;
 
 /**
@@ -48,10 +51,9 @@ public class OnSwipeTouchListener extends AppCompatActivity implements View.OnTo
                 if (Math.abs(diffX) > Math.abs(diffY)) {
                     if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
                         if (diffX > 0) {
-                            setDiffX(diffX);
                             if(diffX > 200){
                                 //Toast.makeText(OnSwipeTouchListener.this, "Right Above 200", Toast.LENGTH_SHORT).show();
-
+                                setRight(e2.getX());
                             }
                             onSwipeRight();
 
@@ -84,12 +86,12 @@ public class OnSwipeTouchListener extends AppCompatActivity implements View.OnTo
         }
     }
 
-    public void setDiffX(float diffX){
-        this.diffX = diffX;
+    public float getRight(){
+        return this.diffX;
     }
 
-    public float getDiffX(){
-        return this.diffX;
+    public void setRight(float diffX){
+        this.diffX = diffX;
     }
 
     public void onSwipeRight() {
@@ -104,4 +106,28 @@ public class OnSwipeTouchListener extends AppCompatActivity implements View.OnTo
     public void onSwipeBottom() {
     }
 }
+
+
+
+
 */
+
+/*
+USAGE
+
+imageView.setOnTouchListener(new OnSwipeTouchListener(MyActivity.this) {
+    public void onSwipeTop() {
+        Toast.makeText(MyActivity.this, "top", Toast.LENGTH_SHORT).show();
+    }
+    public void onSwipeRight() {
+        Toast.makeText(MyActivity.this, "right", Toast.LENGTH_SHORT).show();
+    }
+    public void onSwipeLeft() {
+        Toast.makeText(MyActivity.this, "left", Toast.LENGTH_SHORT).show();
+    }
+    public void onSwipeBottom() {
+        Toast.makeText(MyActivity.this, "bottom", Toast.LENGTH_SHORT).show();
+    }
+
+});
+ */

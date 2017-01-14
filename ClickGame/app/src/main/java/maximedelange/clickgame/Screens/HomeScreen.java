@@ -1,14 +1,17 @@
 package maximedelange.clickgame.Screens;
 
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -48,12 +51,22 @@ public class HomeScreen extends AppCompatActivity {
     private int enemyMovement1;
     private int enemyMovement2;
     private int enemyMovement3;
+    private int enemyHealthBar1;
+    private int enemyHealthBar2;
+    private int enemyHealthBar3;
+    private int enemyHealthShow1;
+    private int enemyHealthShow2;
+    private int enemyHealthShow3;
+    private int enemyHealthCounter = 0;
+    private int enemyHealthBegin = 0;
 
     // GUI components
     private ImageView imgPlayer;
     private TextView textTimer;
     private ProgressBar healthBar;
+    private ProgressBar enemyHealth;
     private TextView playerName;
+    private TextView enemyHealthTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +80,7 @@ public class HomeScreen extends AppCompatActivity {
         setEnemyMovement();
     }
 
+    /*
     public boolean onTouchEvent(MotionEvent touchevent)
     {
         switch (touchevent.getAction())
@@ -113,6 +127,7 @@ public class HomeScreen extends AppCompatActivity {
         }
         return false;
     }
+    */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -137,7 +152,35 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     public void playerDrawing(){
-        //imgPlayer = (ImageView)findViewById(R.id.imagePlayer);
+        imgPlayer = (ImageView)findViewById(R.id.imagePlayer);
+
+        /*
+        imgPlayer.setOnTouchListener(new OnSwipeTouchListener(HomeScreen.this) {
+            public void onSwipeTop() {
+                //linearLayout.removeView(enemy);
+                //linearLayout.removeView(enemyHealth);
+                //createEnemy();
+            }
+            public void onSwipeRight() {
+                //test();
+                //linearLayout.removeView(enemy);
+                //linearLayout.removeView(enemyHealth);
+                //createEnemy();
+            }
+            public void onSwipeLeft() {
+                //linearLayout.removeView(enemy);
+                //linearLayout.removeView(enemyHealth);
+                //createEnemy();
+            }
+            public void onSwipeBottom() {
+                //linearLayout.removeView(enemy);
+                //linearLayout.removeView(enemyHealth);
+                //createEnemy();
+            }
+
+        });
+*/
+
         //imgPlayer.setOnClickListener(new View.OnClickListener() {
         //    @Override
         //    public void onClick(View v) {
@@ -289,6 +332,7 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     public void createEnemy(){
+        // Enemy position
         enemyMovement1 = 0;
         enemyMovement2 = 855;
         enemyMovement3 = 1340;
@@ -296,29 +340,96 @@ public class HomeScreen extends AppCompatActivity {
         x = coordinates.getxPos();
         y = coordinates.getyPos();
 
+        // Enemy health
+        enemyHealthBar1 = 0;
+        enemyHealthBar2 = 855;
+        enemyHealthBar3 = 1490;
+        enemyHealthShow1 = 0;
+        enemyHealthShow2 = 855;
+        enemyHealthShow3 = 1510;
+        enemyHealthCounter += 1;
+        enemyHealth = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
+        enemyHealth.setMax(enemyHealthCounter);
+        enemyHealth.setProgress(enemyHealthCounter);
+        enemyHealthBegin += 1;
+        enemyHealth.setX(x);
+        enemyHealth.setY(y + 150);
+        enemyHealthTxt = new TextView(this);
+        enemyHealthTxt.setTypeface(null, Typeface.BOLD);
+        enemyHealthTxt.setX(x);
+        enemyHealthTxt.setY(y + 170);
+
+        // If statement for correcting the layout of displaying health
+        if(enemyHealthBegin >= 10){
+            enemyHealthTxt.setText(String.valueOf(enemyHealthBegin + " / " + enemyHealthCounter));
+        }else{
+            enemyHealthTxt.setText(String.valueOf("  " + enemyHealthBegin + " / " + enemyHealthCounter));
+        }
+
+        // Creating the actual views
         enemy = new ImageView(this);
         enemy.setImageResource(R.mipmap.ic_launcher);
         enemy.setX(x);
         enemy.setY(y);
         linearLayout.addView(enemy);
+        linearLayout.addView(enemyHealth);
+        linearLayout.addView(enemyHealthTxt);
+
+        // Attack an enemy untill it is killed an created again
+        enemy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enemyHealthCounter -= 1 ;
+                enemyHealth.setProgress(enemyHealthCounter);
+
+                // If statement for correcting the layout of displaying health
+                if(enemyHealthBegin >= 10){
+                    enemyHealthTxt.setText(String.valueOf(enemyHealthBegin + " / " + enemyHealthCounter));
+                }else{
+                    enemyHealthTxt.setText(String.valueOf("  " + enemyHealthBegin + " / " + enemyHealthCounter));
+                }
+
+                // If enemy has been killed. Views are destroyed, update score and recreate an new enemy
+                if(enemyHealthCounter < 1){
+                    Toast.makeText(HomeScreen.this, "killed", Toast.LENGTH_SHORT).show();
+
+                    score ++;
+                    linearLayout.removeView(enemy);
+                    linearLayout.removeView(enemyHealth);
+                    linearLayout.removeView(enemyHealthTxt);
+                    enemyHealthCounter = enemyHealthBegin;
+                    createEnemy();
+                    changeScoreBar(score);
+                }
+            }
+        });
     }
 
     public void getDirection(int direction){
         switch(direction){
             case 0:
-                //System.out.println("0");
                 enemyMovement1 += 1;
+                enemyHealthBar1 += 1;
+                enemyHealthShow1 += 1;
                 enemy.setX(enemyMovement1);
+                enemyHealth.setX(enemyHealthBar1);
+                enemyHealthTxt.setX(enemyHealthShow1);
                 break;
             case 1:
-                //System.out.println("1");
                 enemyMovement2 -= 1;
+                enemyHealthBar2 -= 1;
+                enemyHealthShow2 -= 1;
                 enemy.setX(enemyMovement2);
+                enemyHealth.setX(enemyHealthBar2);
+                enemyHealthTxt.setX(enemyHealthShow2);
                 break;
             case 2:
-                //System.out.println("2");
                 enemyMovement3 -= 1;
+                enemyHealthBar3 -= 1;
+                enemyHealthShow3 -= 1;
                 enemy.setY(enemyMovement3);
+                enemyHealth.setY(enemyHealthBar3);
+                enemyHealthTxt.setY(enemyHealthShow3);
                 break;
         }
     }
