@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="maximedelange.clickgame.Screens.HomeScreen"
+    tools:context="maximedelange.clickgame.Screens.PlayScreen"
     tools:showIn="@layout/activity_home_screen">
 
     <RelativeLayout
@@ -72,9 +72,18 @@
         <ProgressBar
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:id="@+id/playerHealth"
-            android:layout_height="30dp"
-            android:layout_width="100dp"
-            android:layout_below="@+id/score"
+            android:layout_width="70dp"
+            android:layout_marginBottom="35dp"
+            android:layout_height="10dp"
+            android:layout_above="@+id/imagePlayer"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtName"
+            android:layout_above="@+id/playerHealth"
             android:layout_centerHorizontal="true" />
 
         <TextView
@@ -83,8 +92,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="22dp"
-            android:id="@+id/txtName" />
+            android:layout_marginTop="182dp"
+            android:id="@+id/txtHealthShow" />
 
     </RelativeLayout>
 </RelativeLayout>

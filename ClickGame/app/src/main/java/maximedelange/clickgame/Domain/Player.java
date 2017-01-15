@@ -14,6 +14,7 @@ public class Player {
     private String name;
     private int health;
     private int image;
+    private int experience;
 
     // Constructor
     public Player(String name, int health, int image){
@@ -22,9 +23,18 @@ public class Player {
         this.score = 0;
         this.highScore = 0;
         this.image = image;
+        this.experience = 0;
     }
 
     // Methods
+    public void setExperience(int experience){
+        this.experience = experience;
+    }
+
+    public int getExperience(){
+        return this.experience;
+    }
+
     public void setName(String name){
         this.name = name;
     }

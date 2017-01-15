@@ -13,13 +13,13 @@ public class PlayerController {
     private Player player;
 
     // Constructor
-    public PlayerController(){
-        createPlayer();
+    public PlayerController(String name){
+        createPlayer(name);
     }
 
     // Methods
-    public void createPlayer(){
-        player = new Player("Test", 3, R.mipmap.ic_launcher);
+    public void createPlayer(String name){
+        player = new Player(name, 3, R.mipmap.ic_launcher);
     }
 
     public int getHealth(){
@@ -28,6 +28,14 @@ public class PlayerController {
 
     public String getName(){
         return player.getName();
+    }
+
+    public int getHighScore(){
+        return player.getScore();
+    }
+
+    public void setHighScore(int score){
+        this.player.setScore(score);
     }
 
     public int enemyDoDamage(int damage){

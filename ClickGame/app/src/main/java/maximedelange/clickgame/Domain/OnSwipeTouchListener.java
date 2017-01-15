@@ -1,18 +1,6 @@
 
 package maximedelange.clickgame.Domain;
 
-import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
-
-import maximedelange.clickgame.R;
-import maximedelange.clickgame.Screens.HomeScreen;
-
 /**
  * Created by M on 1/10/2017.
  */

@@ -7,10 +7,8 @@ import android.os.CountDownTimer;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
@@ -18,15 +16,13 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.util.ArrayList;
-import java.util.Random;
-import maximedelange.clickgame.Controller.EnemyController;
+
 import maximedelange.clickgame.Controller.PlayerController;
+import maximedelange.clickgame.Database.Database;
 import maximedelange.clickgame.Domain.Coordinates;
-import maximedelange.clickgame.Domain.Enemy;
 import maximedelange.clickgame.R;
 
-public class HomeScreen extends AppCompatActivity {
+public class PlayScreen extends AppCompatActivity {
 
     // Fields
     private int score = 0;
@@ -59,6 +55,7 @@ public class HomeScreen extends AppCompatActivity {
     private int enemyHealthShow3;
     private int enemyHealthCounter = 0;
     private int enemyHealthBegin = 0;
+    private Database database;
 
     // GUI components
     private ImageView imgPlayer;
@@ -67,6 +64,7 @@ public class HomeScreen extends AppCompatActivity {
     private ProgressBar enemyHealth;
     private TextView playerName;
     private TextView enemyHealthTxt;
+    private TextView playerHealthTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +73,7 @@ public class HomeScreen extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        database = new Database(this, null, null, 1);
         initializeGameInformation();
         createEnemy();
         setEnemyMovement();
@@ -151,11 +150,21 @@ public class HomeScreen extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void playerDrawing(){
+    public void createPlayer(){
+        playerHealthTxt = (TextView)findViewById(R.id.txtHealthShow);
+        playerHealthTxt.setText(String.valueOf(playerController.getHealth() + " / " + playerController.getHealth()));
         imgPlayer = (ImageView)findViewById(R.id.imagePlayer);
+        healthBar = (ProgressBar)findViewById(R.id.playerHealth);
+        healthBar.setMax(playerController.getHealth());
+        healthBar.setProgress(playerController.getHealth());
+
+        playerName = (TextView)findViewById(R.id.txtName);
+        playerName.setTextSize(16);
+        playerName.setTypeface(null, Typeface.BOLD);
+        playerName.setText(playerController.getName());
 
         /*
-        imgPlayer.setOnTouchListener(new OnSwipeTouchListener(HomeScreen.this) {
+        imgPlayer.setOnTouchListener(new OnSwipeTouchListener(PlayScreen.this) {
             public void onSwipeTop() {
                 //linearLayout.removeView(enemy);
                 //linearLayout.removeView(enemyHealth);
@@ -191,9 +200,9 @@ public class HomeScreen extends AppCompatActivity {
 
 
         /*
-        imgPlayer.setOnTouchListener(new OnSwipeTouchListener(HomeScreen.this) {
+        imgPlayer.setOnTouchListener(new OnSwipeTouchListener(PlayScreen.this) {
             public void onSwipeTop() {
-                Toast.makeText(HomeScreen.this, "top", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PlayScreen.this, "top", Toast.LENGTH_SHORT).show();
                 onSwipeTouchListener.onSwipeTop();
             }
             public void onSwipeRight() {
@@ -203,7 +212,7 @@ public class HomeScreen extends AppCompatActivity {
             public void onSwipeLeft() {
             }
             public void onSwipeBottom() {
-                Toast.makeText(HomeScreen.this, "bottom", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PlayScreen.this, "bottom", Toast.LENGTH_SHORT).show();
                 onSwipeTouchListener.onSwipeBottom();
                 System.out.println(yPos);
             }
@@ -258,7 +267,7 @@ public class HomeScreen extends AppCompatActivity {
 
         if(Rect.intersects(playerCollision, enemyCollision)){
             if(healthBar.getProgress() <= 0){
-                Toast.makeText(HomeScreen.this, "GAME OVER", Toast.LENGTH_LONG).show();
+                Toast.makeText(PlayScreen.this, "GAME OVER", Toast.LENGTH_LONG).show();
                 countDownMovement.onFinish();
                 countDownTime.onFinish();
             }else{
@@ -316,18 +325,12 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
 
+        score = Integer.valueOf(database.getHighscore());
+
         coordinates = new Coordinates();
-        playerController = new PlayerController();
+        playerController = new PlayerController("Jack");
         changeScoreBar(score);
-
-        healthBar = (ProgressBar)findViewById(R.id.playerHealth);
-        healthBar.setMax(3);
-        healthBar.setProgress(playerController.getHealth());
-
-        playerName = (TextView)findViewById(R.id.txtName);
-        playerName.setText(playerController.getName());
-
-        playerDrawing();
+        createPlayer();
         timer();
     }
 
@@ -391,7 +394,7 @@ public class HomeScreen extends AppCompatActivity {
 
                 // If enemy has been killed. Views are destroyed, update score and recreate an new enemy
                 if(enemyHealthCounter < 1){
-                    Toast.makeText(HomeScreen.this, "killed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PlayScreen.this, "killed", Toast.LENGTH_SHORT).show();
 
                     score ++;
                     linearLayout.removeView(enemy);
@@ -400,6 +403,8 @@ public class HomeScreen extends AppCompatActivity {
                     enemyHealthCounter = enemyHealthBegin;
                     createEnemy();
                     changeScoreBar(score);
+                    playerController.setHighScore(score);
+                    database.updateHighscore(playerController.getHighScore());
                 }
             }
         });
