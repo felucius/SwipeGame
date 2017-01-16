@@ -30,45 +30,6 @@
             android:layout_centerHorizontal="true"
             android:id="@+id/imagePlayer" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/ic_launcher"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/score" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/ic_launcher"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:id="@+id/time" />
-
-        <TextView
-            android:text="TextView"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:id="@+id/txtScore"
-            android:layout_alignBaseline="@+id/txtTime"
-            android:layout_alignBottom="@+id/txtTime"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:text="TextView"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="18dp"
-            android:id="@+id/txtTime"
-            android:layout_below="@+id/time"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:textAlignment="textEnd" />
-
         <ProgressBar
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:id="@+id/playerHealth"
@@ -94,6 +55,24 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="182dp"
             android:id="@+id/txtHealthShow" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="100dp"
+            android:id="@+id/txtScore"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_height="25dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/ic_launcher"
+            android:id="@+id/score"
+            android:layout_below="@+id/txtScore"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 </RelativeLayout>

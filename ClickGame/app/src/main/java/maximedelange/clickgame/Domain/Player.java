@@ -43,6 +43,14 @@ public class Player {
         return this.name;
     }
 
+    public void setHighScore(int score){
+        this.highScore = score;
+    }
+
+    public int getHighScore(){
+        return this.highScore;
+    }
+
     public void setScore(int score){
         this.score = score;
     }

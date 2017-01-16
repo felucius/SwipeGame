@@ -26,16 +26,28 @@ public class PlayerController {
         return player.getHealth();
     }
 
+    public void setHealth(int health){
+        this.player.setHealth(health);
+    }
+
     public String getName(){
         return player.getName();
     }
 
+    public int getScore(){
+        return this.player.getScore();
+    }
+
+    public void setScore(int score){
+        this.player.setScore(score);
+    }
+
     public int getHighScore(){
-        return player.getScore();
+        return player.getHighScore();
     }
 
     public void setHighScore(int score){
-        this.player.setScore(score);
+        this.player.setHighScore(score);
     }
 
     public int enemyDoDamage(int damage){

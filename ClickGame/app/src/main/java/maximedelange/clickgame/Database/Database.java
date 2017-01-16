@@ -14,12 +14,15 @@ import maximedelange.clickgame.Domain.Player;
 
 public class Database extends SQLiteOpenHelper{
 
-    // Fields
+    // Table fields
     private final static int DATABASE_VERSION = 1;
     private final static String DATABASE_NAME = "clickgame";
     public final static String TABLE_PLAYER = "player";
     public final static String COLUMN_ID = "id";
     public final static String COLUMN_HIGHSCORE = "highscore";
+
+    // Fields
+    private String highscore = null;
 
     public Database(Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
@@ -50,8 +53,8 @@ public class Database extends SQLiteOpenHelper{
         db.close();
     }
 
-    public String getHighscore(){
-        String highscore = null;
+    public int getHighscore(){
+        int newHighscore = 0;
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_PLAYER;
 
@@ -66,8 +69,11 @@ public class Database extends SQLiteOpenHelper{
 
                 cursor.moveToNext();
             }
+
+            newHighscore = Integer.valueOf(highscore);
         }
 
-        return highscore;
+        db.close();
+        return newHighscore;
     }
 }

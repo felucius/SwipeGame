@@ -26,45 +26,35 @@ public class PlayScreen extends AppCompatActivity {
 
     // Fields
     private int score = 0;
+    private int currentScore = 0;
     private int highScore = 0;
-    private long time = 0;
-    private CountDownTimer countDownMovement;
-    private CountDownTimer countDownTime;
-    private PlayerController playerController;
-    private boolean isColliding = false;
     private int xPos = 0;
     private int yPos = 0;
-    private float x1 = 0;
-    private float x2 = 0;
-    private float y1 = 0;
-    private float y2 = 0;
-    int x;
-    int y;
-    RelativeLayout linearLayout;
-    private ImageView enemy;
-    private Coordinates coordinates;
+    private int x = 0;
+    private int y = 0;
     private int direction;
-    private int enemyMovement1;
-    private int enemyMovement2;
-    private int enemyMovement3;
-    private int enemyHealthBar1;
-    private int enemyHealthBar2;
-    private int enemyHealthBar3;
-    private int enemyHealthShow1;
-    private int enemyHealthShow2;
-    private int enemyHealthShow3;
+    private int enemyMovement1, enemyMovement2, enemyMovement3 = 0;
+    private int enemyHealthBar1, enemyHealthBar2, enemyHealthBar3 = 0;
+    private int enemyHealthShow1, enemyHealthShow2, enemyHealthShow3 = 0;
     private int enemyHealthCounter = 0;
     private int enemyHealthBegin = 0;
-    private Database database;
+    private boolean isColliding = false;
+    private CountDownTimer countDownMovement = null;
+    private CountDownTimer countDownTime = null;
+    private PlayerController playerController = null;
+    private Coordinates coordinates = null;
+    private Database database = null;
 
     // GUI components
-    private ImageView imgPlayer;
-    private TextView textTimer;
-    private ProgressBar healthBar;
-    private ProgressBar enemyHealth;
-    private TextView playerName;
-    private TextView enemyHealthTxt;
-    private TextView playerHealthTxt;
+    private RelativeLayout linearLayout = null;
+    private ImageView enemy = null;
+    private ImageView player = null;
+    private ProgressBar healthBar = null;
+    private ProgressBar enemyHealth = null;
+    private TextView playerName = null;
+    private TextView enemyHealthTxt = null;
+    private TextView playerHealthTxt = null;
+    private TextView currentScoreTxt = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,60 +63,13 @@ public class PlayScreen extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Create database
         database = new Database(this, null, null, 1);
+        // Initialize gameplay information
         initializeGameInformation();
         createEnemy();
         setEnemyMovement();
     }
-
-    /*
-    public boolean onTouchEvent(MotionEvent touchevent)
-    {
-        switch (touchevent.getAction())
-        {
-            // when user first touches the screen we get x and y coordinate
-            case MotionEvent.ACTION_DOWN:
-            {
-                x1 = touchevent.getX();
-                y1 = touchevent.getY();
-                break;
-            }
-            case MotionEvent.ACTION_UP:
-            {
-                x2 = touchevent.getX();
-                y2 = touchevent.getY();
-
-                //if left to right sweep event on screen
-                if (x1 < x2)
-                {
-                    linearLayout.removeView(enemy);
-                    createEnemy();
-                }
-                // if right to left sweep event on screen
-                if (x1 > x2)
-                {
-                    linearLayout.removeView(enemy);
-                    createEnemy();
-                }
-
-                // if UP to Down sweep event on screen
-                if (y1 < y2)
-                {
-                    linearLayout.removeView(enemy);
-                    createEnemy();
-                }
-
-                //if Down to UP sweep event on screen
-                if (y1 > y2)
-                {
-
-                }
-                break;
-            }
-        }
-        return false;
-    }
-    */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -153,7 +96,7 @@ public class PlayScreen extends AppCompatActivity {
     public void createPlayer(){
         playerHealthTxt = (TextView)findViewById(R.id.txtHealthShow);
         playerHealthTxt.setText(String.valueOf(playerController.getHealth() + " / " + playerController.getHealth()));
-        imgPlayer = (ImageView)findViewById(R.id.imagePlayer);
+        player = (ImageView)findViewById(R.id.imagePlayer);
         healthBar = (ProgressBar)findViewById(R.id.playerHealth);
         healthBar.setMax(playerController.getHealth());
         healthBar.setProgress(playerController.getHealth());
@@ -162,97 +105,19 @@ public class PlayScreen extends AppCompatActivity {
         playerName.setTextSize(16);
         playerName.setTypeface(null, Typeface.BOLD);
         playerName.setText(playerController.getName());
-
-        /*
-        imgPlayer.setOnTouchListener(new OnSwipeTouchListener(PlayScreen.this) {
-            public void onSwipeTop() {
-                //linearLayout.removeView(enemy);
-                //linearLayout.removeView(enemyHealth);
-                //createEnemy();
-            }
-            public void onSwipeRight() {
-                //test();
-                //linearLayout.removeView(enemy);
-                //linearLayout.removeView(enemyHealth);
-                //createEnemy();
-            }
-            public void onSwipeLeft() {
-                //linearLayout.removeView(enemy);
-                //linearLayout.removeView(enemyHealth);
-                //createEnemy();
-            }
-            public void onSwipeBottom() {
-                //linearLayout.removeView(enemy);
-                //linearLayout.removeView(enemyHealth);
-                //createEnemy();
-            }
-
-        });
-*/
-
-        //imgPlayer.setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View v) {
-        //        score ++;
-        //        changeScoreBar(score);
-        //    }
-        //});
-
-
-        /*
-        imgPlayer.setOnTouchListener(new OnSwipeTouchListener(PlayScreen.this) {
-            public void onSwipeTop() {
-                Toast.makeText(PlayScreen.this, "top", Toast.LENGTH_SHORT).show();
-                onSwipeTouchListener.onSwipeTop();
-            }
-            public void onSwipeRight() {
-                float x = onSwipeTouchListener.getDiffX();
-                System.out.println("VALUE OF RIGHT SWIPE" + x);
-            }
-            public void onSwipeLeft() {
-            }
-            public void onSwipeBottom() {
-                Toast.makeText(PlayScreen.this, "bottom", Toast.LENGTH_SHORT).show();
-                onSwipeTouchListener.onSwipeBottom();
-                System.out.println(yPos);
-            }
-        });
-        */
-    }
-
-    // WERKT NIET
-    public void changeScoreBar(int score){
-        ActionBar scoreBar = getSupportActionBar();
-        if(score > highScore){
-            scoreBar.setTitle("high score: " + score);
-            highScore = score;
-        }else{
-            scoreBar.setTitle("score: " + score);
-        }
     }
 
     /*
-    Timer for the total amount of play time
+    Updating the current and highscore
      */
-    public void timer(){
-        textTimer = (TextView)findViewById(R.id.txtTime);
-        countDownTime = new CountDownTimer(60 * 1000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                time = millisUntilFinished / 1000;
-                textTimer.setText("time: " + Long.valueOf(time));
-            }
-
-            @Override
-            public void onFinish() {
-                textTimer.setText("times up!");
-                // Stops the availability to click again if the time is up
-                imgPlayer.setOnTouchListener(null);
-                enemy.setX(imgPlayer.getX());
-            }
-        };
-
-        countDownTime.start();
+    public void changeScoreBar(int score){
+        ActionBar scoreBar = getSupportActionBar();
+        currentScoreTxt.setText("score: " + score);
+        scoreBar.setTitle("high score: " + highScore);
+        if(score > highScore){
+            scoreBar.setTitle("high score: " + score);
+            highScore = score;
+        }
     }
 
     /*
@@ -262,7 +127,7 @@ public class PlayScreen extends AppCompatActivity {
         Rect playerCollision = new Rect();
         Rect enemyCollision = new Rect();
 
-        imgPlayer.getHitRect(playerCollision);
+        player.getHitRect(playerCollision);
         enemy.getHitRect(enemyCollision);
 
         if(Rect.intersects(playerCollision, enemyCollision)){
@@ -272,11 +137,37 @@ public class PlayScreen extends AppCompatActivity {
                 countDownTime.onFinish();
             }else{
                 isColliding = true;
-                //enemyMovement = 0;
-                //enemyMovement = 0;
-                //enemy.setX(0);
-                //enemy.setY(670);
-                healthBar.setProgress(playerController.enemyDoDamage(1));
+
+                // Setting new player health after attack
+                playerController.setHealth(playerController.enemyDoDamage(1));
+                healthBar.setProgress(playerController.getHealth());
+
+                switch (direction){
+                    case 0:
+                        enemyMovement1 = 0;
+                        enemyHealthBar1 = 0;
+                        enemyHealthShow1 = 0;
+                        enemy.setX(enemyMovement1);
+                        enemyHealth.setX(enemyHealthBar1);
+                        enemyHealthTxt.setX(enemyHealthShow1);
+                        break;
+                    case 1:
+                        enemyMovement2 = 855;
+                        enemyHealthBar2 = 855;
+                        enemyHealthShow2 = 855;
+                        enemy.setX(enemyMovement2);
+                        enemyHealth.setX(enemyHealthBar2);
+                        enemyHealthTxt.setX(enemyHealthShow2);
+                        break;
+                    case 2:
+                        enemyMovement3 = 1340;
+                        enemyHealthBar3 = 1490;
+                        enemyHealthShow3 = 1510;
+                        enemy.setY(enemyMovement3);
+                        enemyHealth.setY(enemyHealthBar3);
+                        enemyHealthTxt.setY(enemyHealthShow3);
+                        break;
+                }
             }
         }
     }
@@ -285,17 +176,14 @@ public class PlayScreen extends AppCompatActivity {
     Moves the enemy on the playground
      */
     public void setEnemyMovement(){
-        imgPlayer = (ImageView)findViewById(R.id.imagePlayer);
+        player = (ImageView)findViewById(R.id.imagePlayer);
         countDownMovement = new CountDownTimer(60 * 1000, 10) {
             @Override
             public void onTick(long millisUntilFinished) {
                 if(isColliding){
-                    //enemyMovement = 0;
                     isColliding = false;
                 }else{
-
                     getDirection(direction);
-
                     collisionDetection();
                     isColliding = false;
                 }
@@ -325,13 +213,18 @@ public class PlayScreen extends AppCompatActivity {
             }
         });
 
-        score = Integer.valueOf(database.getHighscore());
+        currentScoreTxt = (TextView)findViewById(R.id.txtScore);
+        currentScoreTxt.setTextSize(20);
+        currentScoreTxt.setTypeface(null, Typeface.BOLD);
+        currentScoreTxt.setText(String.valueOf(currentScore));
+        highScore = Integer.valueOf(database.getHighscore());
+        changeScoreBar(highScore);
 
         coordinates = new Coordinates();
         playerController = new PlayerController("Jack");
         changeScoreBar(score);
         createPlayer();
-        timer();
+        //timer();
     }
 
     public void createEnemy(){
@@ -396,15 +289,19 @@ public class PlayScreen extends AppCompatActivity {
                 if(enemyHealthCounter < 1){
                     Toast.makeText(PlayScreen.this, "killed", Toast.LENGTH_SHORT).show();
 
-                    score ++;
+                    currentScore ++;
                     linearLayout.removeView(enemy);
                     linearLayout.removeView(enemyHealth);
                     linearLayout.removeView(enemyHealthTxt);
                     enemyHealthCounter = enemyHealthBegin;
                     createEnemy();
-                    changeScoreBar(score);
-                    playerController.setHighScore(score);
-                    database.updateHighscore(playerController.getHighScore());
+                    changeScoreBar(currentScore);
+                    if(currentScore >= highScore){
+                        playerController.setHighScore(currentScore);
+                        database.updateHighscore(playerController.getHighScore());
+                    }else{
+                        playerController.setScore(currentScore);
+                    }
                 }
             }
         });

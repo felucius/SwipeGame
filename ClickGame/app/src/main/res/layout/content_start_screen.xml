@@ -13,17 +13,6 @@
     tools:context="maximedelange.clickgame.Screens.StartScreen"
     tools:showIn="@layout/activity_start_screen">
 
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnCredits"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="54dp"
-        android:id="@+id/txtHighscore"
-        android:textStyle="bold"
-        android:textSize="20sp"/>
-
     <Button
         android:text="Button"
         android:layout_height="wrap_content"
@@ -63,10 +52,21 @@
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnCredits"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="69dp"
         android:id="@+id/txtHighscoreShow"
         android:textStyle="bold"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:layout_below="@+id/btnCredits"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:id="@+id/txtHighscore"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_below="@+id/txtHighscoreShow"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

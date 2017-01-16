@@ -40,9 +40,9 @@ public class StartScreen extends AppCompatActivity {
 
     public void initializeStartScreen(){
         appName = (TextView)findViewById(R.id.txtAppName);
-        appName.setText("Dungeon clicker");
+        appName.setText("Tapper");
         textScoreShow = (TextView)findViewById(R.id.txtHighscoreShow);
-        textScoreShow.setText("current highscore:");
+        textScoreShow.setText("current highscore");
         btnPlay = (Button)findViewById(R.id.btnPlay);
         btnPlay.setText("PLAY");
         btnPlay.setOnClickListener(new View.OnClickListener() {
