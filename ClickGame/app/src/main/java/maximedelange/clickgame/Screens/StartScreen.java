@@ -1,9 +1,11 @@
 package maximedelange.clickgame.Screens;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -24,6 +26,7 @@ public class StartScreen extends AppCompatActivity {
     private TextView textScore;
     private TextView textScoreShow;
     private TextView appName;
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,7 @@ public class StartScreen extends AppCompatActivity {
         textScore = (TextView)findViewById(R.id.txtHighscore);
         score = Integer.valueOf(database.getHighscore());
         textScore.setText(String.valueOf(score));
+       //actionBar = getSupportActionBar();
+        //actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(android.R.color.black)));
     }
-
 }

@@ -2,9 +2,11 @@ package maximedelange.clickgame.Screens;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -22,6 +24,7 @@ public class SplashScreen extends AppCompatActivity {
     private Animation animation;
     private Animation fade;
     private TextView loadTxt;
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,8 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     public void loading(){
+        actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(android.R.color.black)));
         loadTxt = (TextView)findViewById(R.id.txtLoading);
         loadTxt.setText("loading...");
         loadTxt.setTextSize(24);

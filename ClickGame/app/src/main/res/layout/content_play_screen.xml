@@ -11,7 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="maximedelange.clickgame.Screens.PlayScreen"
-    tools:showIn="@layout/activity_home_screen">
+    tools:showIn="@layout/activity_play_screen">
 
     <RelativeLayout
         android:orientation="horizontal"
@@ -58,21 +58,51 @@
 
         <TextView
             android:text="TextView"
-            android:layout_width="100dp"
-            android:id="@+id/txtScore"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtHighScore"
             android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_height="25dp" />
+            android:layout_toStartOf="@+id/imagePlayer"
+            android:layout_width="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
-        <ImageView
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@mipmap/ic_launcher"
-            android:id="@+id/score"
-            android:layout_below="@+id/txtScore"
+            android:id="@+id/btnUpgrade"
+            android:layout_alignTop="@+id/btnStatus"
+            android:layout_alignLeft="@+id/playerHealth"
+            android:layout_alignStart="@+id/playerHealth" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/ic_launcher"
+            android:id="@+id/btnPlay"
+            android:layout_alignTop="@+id/btnUpgrade"
+            android:layout_alignRight="@+id/txtScore"
+            android:layout_alignEnd="@+id/txtScore" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/ic_launcher"
+            android:id="@+id/btnStatus"
+            android:layout_marginTop="32dp"
+            android:layout_below="@+id/txtHighScore"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="TextView"
+            android:id="@+id/txtScore"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewStart"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/txtHighScore"
+            android:layout_alignRight="@+id/txtHighScore"
+            android:layout_alignEnd="@+id/txtHighScore" />
 
     </RelativeLayout>
 </RelativeLayout>

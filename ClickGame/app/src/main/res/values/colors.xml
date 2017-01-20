@@ -3,4 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="scv_background">#80000000</color>
+    <color name="scv_buttontext">#ffffff</color>
+    <color name="scv_textcolor">#ff0015</color>
 </resources>
