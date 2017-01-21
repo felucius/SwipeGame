@@ -42,6 +42,8 @@ public class StartScreen extends AppCompatActivity {
     }
 
     public void initializeStartScreen(){
+        actionBar = getSupportActionBar();
+        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(android.R.color.black)));
         appName = (TextView)findViewById(R.id.txtAppName);
         appName.setText("Tapper");
         textScoreShow = (TextView)findViewById(R.id.txtHighscoreShow);

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@android:color/background_light"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="1dp"
+        android:background="#96989b"
+        android:layout_width="match_parent"
+        android:weightSum="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="20dp"
+            android:layout_weight="0.29">
+
+            <View
+                android:layout_width="match_parent"
+                android:background="@android:color/darker_gray"
+                android:layout_below="@+id/txtScore"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:text="HEALTH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:layout_toRightOf="@+id/imgUpgradeHealth"
+                android:layout_toEndOf="@+id/imgUpgradeHealth"
+                android:id="@+id/upgradeHealthTxtShow" />
+
+            <ImageView
+                android:layout_height="wrap_content"
+                app:srcCompat="@mipmap/ic_launcher"
+                android:id="@+id/imgUpgradeHealth"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignBottom="@+id/btnUpgradeHealth"
+                android:layout_width="75dp" />
+
+            <ImageView
+                android:layout_height="wrap_content"
+                app:srcCompat="@mipmap/ic_launcher"
+                android:id="@+id/imgUpgradeDamage"
+                android:layout_alignTop="@+id/upgradeDamageTxtShow"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignBottom="@+id/btnUpgradeDamage"
+                android:layout_width="75dp" />
+
+            <TextView
+                android:text="DAMAGE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:id="@+id/upgradeDamageTxtShow"
+                android:layout_marginTop="28dp"
+                android:layout_below="@+id/upgradeHealthTxt"
+                android:layout_toRightOf="@+id/imgUpgradeDamage"
+                android:layout_toEndOf="@+id/imgUpgradeDamage" />
+
+            <Button
+                android:text="Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnUpgradeHealth"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/upgradeHealthTxtShow"
+                android:layout_alignLeft="@+id/upgradeDamageCostTxt"
+                android:layout_alignStart="@+id/upgradeDamageCostTxt" />
+
+            <Button
+                android:text="Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnUpgradeDamage"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/upgradeDamageTxtShow" />
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/upgradeHealthCostTxt"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:layout_alignLeft="@+id/btnUpgradeHealth"
+                android:layout_alignStart="@+id/btnUpgradeHealth"
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/upgradeDamageTxtShow"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/upgradeDamageCostTxt"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:layout_alignLeft="@+id/btnUpgradeDamage"
+                android:layout_alignStart="@+id/btnUpgradeDamage"
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/upgradeHealthTxt"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:layout_alignBaseline="@+id/btnUpgradeHealth"
+                android:layout_alignBottom="@+id/btnUpgradeHealth"
+                android:layout_toRightOf="@+id/imgUpgradeHealth"
+                android:layout_toEndOf="@+id/imgUpgradeHealth" />
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:id="@+id/upgradeDamageTxt"
+                android:layout_alignBaseline="@+id/btnUpgradeDamage"
+                android:layout_alignBottom="@+id/btnUpgradeDamage"
+                android:layout_toRightOf="@+id/imgUpgradeDamage"
+                android:layout_toEndOf="@+id/imgUpgradeDamage" />
+
+            <View
+                android:layout_width="match_parent"
+                android:background="@android:color/darker_gray"
+                android:id="@+id/view2"
+                android:layout_below="@+id/imgUpgradeHealth"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_height="1dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:background="@android:color/darker_gray"
+                android:id="@+id/view4"
+                android:layout_below="@+id/imgUpgradeDamage"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_height="1dp" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/dismissPopup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:text="Dismiss message"
+            android:layout_weight="0.13" />
+    </LinearLayout>
+</LinearLayout>

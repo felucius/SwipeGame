@@ -30,8 +30,36 @@ public class PlayerController {
         this.player.setHealth(health);
     }
 
+    public void setUpgradeHealth(int health){
+        this.player.setUpgradeHealth(health);
+    }
+
+    public void setUpgradeDamage(int health){
+        this.player.setUpgradeDamage(health);
+    }
+
     public String getName(){
         return player.getName();
+    }
+
+    public void setDamage(int damage){
+        this.player.setDamage(damage);
+    }
+
+    public int getDamage(){
+        return player.getDamage();
+    }
+
+    public void setGold(int gold){
+        this.player.setGold(gold);
+    }
+
+    public int getGold(){
+        return this.player.getGold();
+    }
+
+    public void setBuyUpgrade(int upgradeCost){
+        this.player.setBuyUpgrade(upgradeCost);
     }
 
     public int getScore(){
@@ -48,6 +76,14 @@ public class PlayerController {
 
     public void setHighScore(int score){
         this.player.setHighScore(score);
+    }
+
+    public void setAmountOfUpgrades(int amountOfUpgrades){
+        this.player.setAmountOfUpgrades(amountOfUpgrades);
+    }
+
+    public int getAmoutOfUpgrades(){
+        return this.player.getAmountOfUpgrades();
     }
 
     public int enemyDoDamage(int damage){

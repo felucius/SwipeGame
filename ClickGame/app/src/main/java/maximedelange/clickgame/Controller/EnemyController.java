@@ -1,10 +1,8 @@
 package maximedelange.clickgame.Controller;
 
-import android.graphics.Bitmap;
-import android.widget.ImageView;
+import java.util.Random;
 
-import java.util.ArrayList;
-
+import maximedelange.clickgame.Domain.Coordinates;
 import maximedelange.clickgame.Domain.Enemy;
 
 /**
@@ -14,18 +12,49 @@ import maximedelange.clickgame.Domain.Enemy;
 public class EnemyController {
 
     // Fields
-    private ArrayList<Enemy> enemies;
+    private Enemy enemy;
+    private Random amountOfGold;
+    private Random amountOfDamage;
+    private Coordinates coordinates;
 
     // Constructor
     public EnemyController(){
-        //createEnemies();
+        coordinates = new Coordinates();
+        enemy = new Enemy(0, 0, randomEnemyGold(), randomEnemyGold());
     }
 
     // Methods
-    public ArrayList<Enemy> createEnemies(Bitmap bitmap){
-        enemies = new ArrayList<>();
-        enemies.add(new Enemy(0, 0, bitmap));
+    public int randomEnemyGold(){
+        amountOfGold = new Random();
+        return amountOfGold.nextInt(100);
+    }
 
-        return enemies;
+    public void setGold(int gold){
+        this.enemy.setGold(gold);
+    }
+
+    public int getGold(){
+        return this.enemy.getGold();
+    }
+
+    public int randomEnemyDamage(){
+        amountOfDamage = new Random();
+        return amountOfDamage.nextInt(1);
+    }
+
+    public void setDamage(){
+        this.enemy.setDamage(randomEnemyDamage());
+    }
+
+    public int getDamage(){
+        return this.enemy.getDamage();
+    }
+
+    public void setHealth(int health){
+        this.enemy.setHealth(health);
+    }
+
+    public int getHealth(){
+        return this.enemy.getHealth();
     }
 }

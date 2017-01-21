@@ -15,6 +15,9 @@ public class Player {
     private int health;
     private int image;
     private int experience;
+    private int damage;
+    private int gold;
+    private int amountOfUpgrades;
 
     // Constructor
     public Player(String name, int health, int image){
@@ -24,9 +27,32 @@ public class Player {
         this.highScore = 0;
         this.image = image;
         this.experience = 0;
+        this.damage = 1;
+        this.gold = 0;
+        this.amountOfUpgrades = 0;
     }
 
     // Methods
+    public void setAmountOfUpgrades(int amountOfUpgrades){
+        this.amountOfUpgrades += amountOfUpgrades;
+    }
+
+    public int getAmountOfUpgrades(){
+        return this.amountOfUpgrades;
+    }
+
+    public void setGold(int gold){
+        this.gold += gold;
+    }
+
+    public int getGold(){
+        return this.gold;
+    }
+
+    public void setBuyUpgrade(int gold){
+        this.gold -= gold;
+    }
+
     public void setExperience(int experience){
         this.experience = experience;
     }
@@ -51,6 +77,14 @@ public class Player {
         return this.highScore;
     }
 
+    public void setDamage(int damage){
+        this.damage = damage;
+    }
+
+    public int getDamage(){
+        return this.damage;
+    }
+
     public void setScore(int score){
         this.score = score;
     }
@@ -61,6 +95,14 @@ public class Player {
 
     public void setHealth(int health){
         this.health = health;
+    }
+
+    public void setUpgradeHealth(int health){
+        this.health += health;
+    }
+
+    public void setUpgradeDamage(int health){
+        this.damage += damage;
     }
 
     public int getHealth(){

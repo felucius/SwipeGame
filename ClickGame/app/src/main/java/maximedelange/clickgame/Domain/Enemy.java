@@ -17,14 +17,18 @@ public class Enemy {
     private int xPos;
     private int yPos;
     private int health;
+    private int gold;
     private int image;
+    private int damage;
     private ImageView imageView;
     private Rect size;
 
     // Constructor
-    public Enemy(int xPos, int yPos, Bitmap bitmap){
+    public Enemy(int xPos, int yPos, int gold, int damage){
         this.xPos = xPos;
         this.yPos = yPos;
+        this.gold = gold;
+        this.damage = damage;
         this.imageView = imageView;
         this.health = 1;
         this.size = new Rect();
@@ -47,6 +51,22 @@ public class Enemy {
 
     public int getyPos(){
         return this.yPos;
+    }
+
+    public void setGold(int gold){
+        this.gold = gold;
+    }
+
+    public int getGold(){
+        return this.gold;
+    }
+
+    public void setDamage(int damage){
+        this.damage = damage;
+    }
+
+    public int getDamage(){
+        return this.damage;
     }
 
     public void setHealth(int health){
